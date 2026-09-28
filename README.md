@@ -74,26 +74,23 @@ Each row links to the matching section in [ONBOARDING.md](ONBOARDING.md). A PR w
    ./scripts/bootstrap-issues.sh
    ```
 
-3. Commit bootstrap changes and push.
-4. Work in **[ONBOARDING.md](ONBOARDING.md)** only: add evidence, open a PR with `Closes #N` (issue link is on the checklist line).
-5. When everything is complete (or intentionally N/A), generate an update for your CNCF onboarding issue:
-
-   ```bash
-   ./scripts/generate-status-report.sh
-   ./scripts/generate-status-report.sh --post   # posts as a comment via gh
-   ```
+3. Add a `CNCF_SANDBOX_TOKEN` repo secret (a GitHub PAT with `public_repo` scope) so Actions can comment on the CNCF onboarding issue on your behalf — see [CONTRIBUTING.md](CONTRIBUTING.md).
+4. Commit bootstrap changes and push.
+5. Work in **[ONBOARDING.md](ONBOARDING.md)** only: add evidence, open a PR with `Closes #N` (issue link is on the checklist line). When that issue closes, a progress comment is posted to your CNCF onboarding issue automatically.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.
 
 ## How tracking works
 
-| Stage | Checklist line shows |
+| Stage | What happens |
 | --- | --- |
-| After bootstrap | `- [ ] … (Issue: [#N](…))` |
-| After you open a PR with `Closes #N` | `- [x] … (PR: [#M](…))` in ONBOARDING.md and this README |
-| After the PR merges | Issue closes; state on `main` already matches |
+| After bootstrap | Checklist line shows `- [ ] … (Issue: [#N](…))` |
+| After you open a PR with `Closes #N` | Line becomes `- [x] … (PR: [#M](…))` in ONBOARDING.md and this README |
+| After the PR merges (issue closes) | Actions posts a comment with that item on your **CNCF onboarding issue** — progress becomes visible to CNCF as you go, not just at the end |
 
-Some items are labeled `[CNCF Staff]` — these are completed by CNCF staff, not you. Track them for follow-up and check the box once staff confirms.
+Some items are labeled `[CNCF Staff]` — these are completed by CNCF staff, not you. Track them for follow-up and check the box once staff confirms; closing that issue also posts a comment.
+
+Need a one-time full summary instead (e.g. the first update, or to catch up if a comment failed)? Run `./scripts/generate-status-report.sh --post`.
 
 ## References
 
