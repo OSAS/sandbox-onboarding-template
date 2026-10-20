@@ -21,7 +21,7 @@ This repository helps you track and complete [CNCF Sandbox onboarding](https://g
 
 ## Onboarding checklist
 
-Each row links to the matching section in [ONBOARDING.md](ONBOARDING.md). A PR with `Closes #N` checks the box and switches `(Issue: …)` to `(PR: …)` automatically — do not edit these lines by hand.
+Each row links to the matching section in [ONBOARDING.md](ONBOARDING.md). When a PR with `Closes #N` **merges**, automation checks the box and switches `(Issue: …)` to `(PR: …)` — do not edit these lines by hand.
 
 <!-- onboarding-dashboard:start -->
 - ⬜ [Review and understand the CNCF IP Policy](ONBOARDING.md#ip-policy-review) (Issue: #ISSUE_IP_POLICY_REVIEW)
@@ -66,7 +66,7 @@ Each row links to the matching section in [ONBOARDING.md](ONBOARDING.md). A PR w
 ## Quick start
 
 1. Click **Use this template** to create your own copy of this repository.
-2. Clone and bootstrap checklist issues:
+2. Clone and bootstrap checklist issues (requires your project's CNCF onboarding issue URL — bootstrap pulls that issue's live checklist):
 
    ```bash
    git clone git@github.com:YOUR_ORG/YOUR_REPO.git
@@ -75,8 +75,10 @@ Each row links to the matching section in [ONBOARDING.md](ONBOARDING.md). A PR w
    ```
 
 3. Add a `CNCF_SANDBOX_TOKEN` repo secret (a GitHub PAT with `public_repo` scope) so Actions can comment on the CNCF onboarding issue on your behalf — see [CONTRIBUTING.md](CONTRIBUTING.md).
-4. Commit bootstrap changes and push.
+4. Commit bootstrap changes and push (include `.github/onboarding-items.generated.json`).
 5. Work in **[ONBOARDING.md](ONBOARDING.md)** only: add evidence, open a PR with `Closes #N` (issue link is on the checklist line). When that issue closes, a progress comment is posted to your CNCF onboarding issue automatically.
+
+If CNCF updates the onboarding checklist later, run `./scripts/sync-cncf-checklist.sh`.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.
 
@@ -84,9 +86,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow.
 
 | Stage | What happens |
 | --- | --- |
-| After bootstrap | Checklist line shows `- [ ] … (Issue: [#N](…))` |
-| After you open a PR with `Closes #N` | Line becomes `- [x] … (PR: [#M](…))` in ONBOARDING.md and this README |
-| After the PR merges (issue closes) | Actions posts a comment with that item on your **CNCF onboarding issue** — progress becomes visible to CNCF as you go, not just at the end |
+| At bootstrap | Live checklist is pulled from your CNCF onboarding issue; local issues + ONBOARDING.md are generated from it |
+| After bootstrap | Checklist line shows `- [ ] … (Issue: [#N](…))` (or `[x]` if already checked on the CNCF issue) |
+| While a PR with `Closes #N` is open | Checklist stays unchecked on `main` (avoids merge conflicts across concurrent PRs) |
+| After the PR merges | Line becomes `- [x] … (PR: [#M](…))` in ONBOARDING.md and this README; when each issue closes, Actions posts that item on your **CNCF onboarding issue** |
 
 Some items are labeled `[CNCF Staff]` — these are completed by CNCF staff, not you. Track them for follow-up and check the box once staff confirms; closing that issue also posts a comment.
 

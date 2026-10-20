@@ -4,10 +4,11 @@
 
 ## Checklist items
 
-<!-- Required: Closes #N drives automation. When this PR opens, Actions checks
+<!-- Required: Closes #N drives automation. After this PR merges, Actions checks
      the box in ONBOARDING.md/README and switches (Issue: …) → (PR: …).
-     Do not check boxes in this PR or in ONBOARDING.md yourself. -->
+     Use one keyword per issue. Do not check boxes yourself. -->
 
+Closes #
 Closes #
 
 ## ONBOARDING.md sections updated

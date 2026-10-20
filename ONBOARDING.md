@@ -2,7 +2,7 @@
 
 Single source of truth for completing [CNCF Sandbox onboarding](https://github.com/cncf/sandbox/issues/487) after your project's TOC acceptance vote.
 
-**Work here only:** each item shows `(Issue: …)` until you open a PR with `Closes #N`; automation then checks the box and shows `(PR: …)` here and in [README.md](README.md). Edit evidence below; do not edit README or toggle boxes yourself.
+**Work here only:** each item shows `(Issue: …)` until a PR with `Closes #N` **merges**; automation then checks the box and shows `(PR: …)` here and in [README.md](README.md). Edit evidence below; do not edit README or toggle boxes yourself.
 
 Onboarding should be completed within **one month** of acceptance. When everything is done (or intentionally N/A), run `./scripts/generate-status-report.sh` to produce an update for your CNCF onboarding issue.
 
@@ -222,29 +222,53 @@ _Analytics status, or N/A._
 
 ## Update and document project details
 
+### dot-project-repo
+
+<!-- field-guide:start -->
+Create or ensure your [`.project` repo](https://contribute.cncf.io/blog/2026/04/22/introducing-dot-project-for-maintainers) is up to date with maintainer information.
+<!-- field-guide:end -->
+
+- [ ] Create or update the .project repo with maintainer information <!-- checklist:dot-project-repo --> (Issue: #ISSUE_DOT_PROJECT_REPO)
+
+**Evidence:**
+
+_Link to the .project repository._
+
 ### maintainer-list-pr
 
 <!-- field-guide:start -->
-Create/verify `MAINTAINERS.md` and open a PR against the aggregated CNCF maintainer list.
+Create/verify `MAINTAINERS.md` and open a PR against the aggregated CNCF maintainer list (or keep the `.project` repo current if that is the path your onboarding issue specifies).
 <!-- field-guide:end -->
 
 - [ ] Create a maintainer list and add it to the aggregated CNCF maintainer list <!-- checklist:maintainer-list-pr --> (Issue: #ISSUE_MAINTAINER_LIST_PR)
 
 **Evidence:**
 
-_Link to MAINTAINERS.md and the PR against the aggregated list._
+_Link to MAINTAINERS.md / .project repo and any related PR._
+
+### lfx-profile
+
+<!-- field-guide:start -->
+Ensure each maintainer has an up-to-date [LFX Individual Dashboard profile](https://openprofile.dev/) with an active email address for mailing list and Service Desk access.
+<!-- field-guide:end -->
+
+- [ ] Ensure each maintainer has an up-to-date LFX Individual Dashboard profile <!-- checklist:lfx-profile --> (Issue: #ISSUE_LFX_PROFILE)
+
+**Evidence:**
+
+_Confirm each maintainer profile is current._
 
 ### maintainer-emails
 
 <!-- field-guide:start -->
-Email maintainer addresses to `project-onboarding@cncf.io` (not shared publicly). Also link each maintainer's GitHub ID with their LF profile.
+Email maintainer addresses to `project-onboarding@cncf.io` (not shared publicly), or ensure LFX profiles include active emails if that is what your onboarding issue requires. Also link each maintainer's GitHub ID with their LF profile.
 <!-- field-guide:end -->
 
 - [ ] Provide maintainer emails for mailing list and Service Desk access <!-- checklist:maintainer-emails --> (Issue: #ISSUE_MAINTAINER_EMAILS)
 
 **Evidence:**
 
-_Date emailed; confirm LF profile linking._
+_Date emailed / LFX profiles confirmed._
 
 ### dco-enabled
 
@@ -273,7 +297,7 @@ _Link to the README section._
 ### lf-footer
 
 <!-- field-guide:start -->
-Add the Linux Foundation footer to your website per [LF branding guidelines](https://github.com/cncf/foundation/blob/main/website-guidelines.md). If you don't have a dedicated website, adopt these guidelines for `README.md` instead.
+Add the Linux Foundation footer to your website per [LF branding guidelines](https://github.com/cncf/foundation/blob/main/policies-guidance/website-guidelines.md). If you don't have a dedicated website, adopt these guidelines for `README.md` instead.
 <!-- field-guide:end -->
 
 - [ ] Add the LF footer to your website (or README if no website) <!-- checklist:lf-footer --> (Issue: #ISSUE_LF_FOOTER)
@@ -417,6 +441,30 @@ CNCF staff creates a groups.io maintainer list for the project in the LFX Projec
 **Evidence:**
 
 _Groups.io list name/link._
+
+### cncf-service-desk
+
+<!-- field-guide:start -->
+CNCF staff creates the project in the CNCF Service Desk.
+<!-- field-guide:end -->
+
+- [ ] CNCF staff: create project in CNCF Service Desk <!-- checklist:cncf-service-desk --> (Issue: #ISSUE_CNCF_SERVICE_DESK)
+
+**Evidence:**
+
+_Confirmation Service Desk project exists._
+
+### onboard-project-workflow
+
+<!-- field-guide:start -->
+CNCF staff runs the [Onboard Project workflow](https://github.com/cncf/maintainer-manager/actions/workflows/onboard-project.yml).
+<!-- field-guide:end -->
+
+- [ ] CNCF staff: run Onboard Project workflow <!-- checklist:onboard-project-workflow --> (Issue: #ISSUE_ONBOARD_PROJECT_WORKFLOW)
+
+**Evidence:**
+
+_Link to the workflow run, or confirmation complete._
 
 ### groupsio-maintainers-list
 

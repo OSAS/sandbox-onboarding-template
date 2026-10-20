@@ -12,7 +12,18 @@ After creating your repository from this template, run:
 ./scripts/bootstrap-issues.sh
 ```
 
-This prompts for basic info (project name, your CNCF onboarding issue URL, acceptance date), creates one GitHub issue per checklist item, and writes issue links onto the matching checklist lines in **[ONBOARDING.md](ONBOARDING.md)**.
+This prompts for basic info (project name, **your CNCF onboarding issue URL**, acceptance date), then:
+
+1. **Pulls the live checklist** from that CNCF issue (authoritative item list and section structure)
+2. Matches items to the generic guide catalog in `.github/onboarding-items.json` for slugs/guides/flags
+3. Regenerates **[ONBOARDING.md](ONBOARDING.md)** and creates one GitHub issue per item
+4. Marks items already checked on the CNCF issue as complete locally
+
+If CNCF updates your onboarding issue later, re-align with:
+
+```bash
+./scripts/sync-cncf-checklist.sh
+```
 
 ### 2. Work on checklist items (ONBOARDING.md only)
 
@@ -24,31 +35,34 @@ Each section includes:
 - A checklist line with `(Issue: [#N](…))` (after bootstrap)
 - An **Evidence** area for links/notes proving completion
 
-Pick an issue, edit the relevant section(s) in `ONBOARDING.md`, and open a pull request with `Closes #N`. Do **not** manually check the checklist box — automation marks it `[x]` and updates `(PR: …)` in **both** `ONBOARDING.md` and [README.md](README.md). **Do not edit README** for evidence or tracking.
+Pick an issue, edit the relevant section(s) in `ONBOARDING.md`, and open a pull request with `Closes #N`. Do **not** manually check the checklist box — automation marks it `[x]` and updates `(PR: …)` in **both** `ONBOARDING.md` and [README.md](README.md) **after the PR merges**. **Do not edit README** for evidence or tracking.
 
-Progress and the checklist dashboard live in README only; they update automatically.
+Progress and the checklist dashboard live in README only; they update automatically on merge.
 
 ### 3. Close issues via pull requests
 
-Reference the checklist issue in your PR description:
+Reference checklist issue(s) in your PR description — one keyword per issue (recommended):
 
 ```markdown
 Closes #12
+Closes #15
 ```
 
-Supported keywords: `Closes`, `Fixes`, `Resolves` (case insensitive).
+Supported keywords: `Closes`, `Fixes`, `Resolves` (case insensitive). A single line like `Closes #12, #15` is also accepted by our sync, but prefer one keyword per issue so GitHub itself closes each issue on merge.
 
 ### 4. Checklist sync
 
-The [sync-checklist-pr workflow](.github/workflows/sync-checklist-pr.yml) runs when you open or update a PR with `Closes #N`. On your PR branch it:
+Checkbox and README updates run **only after merge**, so open PRs do not fight over shared checklist lines.
 
-1. Replaces `(Issue: …)` with `(PR: …)`
-2. Checks the box (`[x]`) in `ONBOARDING.md`
-3. Mirrors those lines and refreshes progress in README
+The [sync-checklist-pr workflow](.github/workflows/sync-checklist-pr.yml) runs when a PR merges. On `main` it:
 
-The [sync-checklist workflow](.github/workflows/sync-checklist.yml) runs when the local issue closes (i.e. the PR merged, or the issue was closed directly for a staff-tracked item). It:
+1. Finds every closing issue number in the PR body
+2. Replaces `(Issue: …)` with `(PR: …)` and checks the box (`[x]`) for each
+3. Mirrors those lines and refreshes progress in README in one commit
 
-1. Checks the box on `main` directly if it wasn't already (no follow-up bot PR)
+The [sync-checklist workflow](.github/workflows/sync-checklist.yml) runs when each local issue closes (from that merge, or a direct/staff close). It:
+
+1. Applies the same checkbox / PR-link update if the merge workflow has not already
 2. **Posts a comment on your CNCF onboarding issue** with just that item — checkbox, evidence, and a link back to the tracking issue/PR
 
 This gives CNCF live, item-by-item visibility instead of one report at the end.

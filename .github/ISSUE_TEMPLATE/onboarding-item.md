@@ -15,7 +15,7 @@ body:
         1. Open the matching section in `ONBOARDING.md` (instructions and issue link are on the checklist line).
         2. Add evidence and open a pull request that only changes `ONBOARDING.md`.
         3. Include `Closes #ISSUE_NUMBER` in the PR description (replace with this issue's number).
-        4. When the PR opens, the box is checked and linked automatically. When it merges, this issue closes.
+        4. When the PR merges, this issue closes and the box is checked/linked automatically.
 
   - type: textarea
     attributes:
